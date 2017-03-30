@@ -4,4 +4,5 @@ In use:
 * Backbone
 * Undersore
 * jQuery
+
 The project is built using webpack.
