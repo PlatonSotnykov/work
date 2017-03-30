@@ -1,0 +1,45 @@
+@animationTime: 0.25s;
+
+.scroller {
+    position: relative;
+    width: 600px;
+    height: 200px;
+    border: solid 2px black;
+    white-space: nowrap;
+    font-size: 0;
+    overflow: hidden;
+    margin: 50px auto;
+
+    &-item {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        -webkit-transition: left @animationTime ease-out;
+        text-align: center;
+        color: black;
+        font-size: 24px;
+        line-height: 200px;
+
+        &:nth-of-type(1) {
+            left: -200px;
+        }
+
+        &:nth-of-type(2) {
+            left: 0px;
+            border-left: 0;
+        }
+
+        &:nth-of-type(3) {
+            left: 200px;
+        }
+
+        &:nth-of-type(4) {
+            left: 400px;
+        }
+
+        &:nth-of-type(5) {
+            left: 600px;
+        }
+    }
+}
