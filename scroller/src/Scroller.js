@@ -15,10 +15,12 @@ var Scroller = Backbone.View.extend({
         this.itemsCount = opt && opt.itemsCount || 5;
     },
     left: function() {
+        this._stopAnimation();
         this.$el.prepend((new ScrollerItem).render().$el);
         this.$el.children().last().remove();
     },
     right: function() {
+        this._stopAnimation();
         this.$el.append((new ScrollerItem).render().$el);
         this.$el.children().first().remove();
     },
@@ -29,6 +31,10 @@ var Scroller = Backbone.View.extend({
             this.$el.append((new ScrollerItem).render().$el);
         }
         return this;
+    },
+    _stopAnimation: function() {
+        this.$el.addClass('scroller_noanim')[0].offsetHeight;
+        this.$el.removeClass('scroller_noanim');
     }
 });
 
