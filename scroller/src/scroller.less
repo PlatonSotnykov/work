@@ -1,74 +1,71 @@
-@animationTime: 0.25s;
+@animationTime: 1s;
 
-.scroller {
+.scroller, .no3dScroller, .noTransformScroller {
     position: relative;
-    width: 600px;
+    width: 1000px;
     height: 200px;
     border: solid 2px black;
-    white-space: nowrap;
-    font-size: 0;
     overflow: hidden;
-    margin: 50px auto;
+    margin: 38px auto;
 
     &-item {
         position: absolute;
         width: 200px;
         height: 200px;
         display: inline-block;
-        -webkit-transition: transform @animationTime ease-out;
         text-align: center;
         color: black;
-        font-size: 24px;
+        font-size: 32px;
         line-height: 200px;
-
-/* The difference between translateX and translate3d is evident when
-"Enable paint flashing" and "Show layer borders" options are enabled */
-/*
-        &:nth-of-type(1) {
-            -webkit-transform: translateX(-200px);
-        }
-
-        &:nth-of-type(2) {
-            -webkit-transform: translateX(0);
-        }
-
-        &:nth-of-type(3) {
-            -webkit-transform: translateX(200px);
-        }
-
-        &:nth-of-type(4) {
-            -webkit-transform: translateX(400px);
-        }
-
-        &:nth-of-type(5) {
-            -webkit-transform: translateX(600px);
-        }
-*/
-        &:nth-of-type(1) {
-            -webkit-transform: translate3d(-200px, 0, 0);
-        }
-
-        &:nth-of-type(2) {
-            -webkit-transform: translate3d(0, 0, 0);
-        }
-
-        &:nth-of-type(3) {
-            -webkit-transform: translate3d(200px, 0, 0);
-        }
-
-        &:nth-of-type(4) {
-            -webkit-transform: translate3d(400px, 0, 0);
-        }
-
-        &:nth-of-type(5) {
-            -webkit-transform: translate3d(600px, 0, 0);
-        }
-
     }
 
     &_noanim {
-        .scroller-item {
-            -webkit-transition: none;
+        .scroller, .no3dScroller, .noTransformScroller {
+            &-item {
+                -webkit-transition: none;
+            }
         }
+    }
+}
+
+.scroller {
+    &-item {
+        -webkit-transition: transform @animationTime ease-out;
+
+        .f-generateOffsets(@n, @i: 1) when (@i =< @n) {
+            &:nth-of-type(@{i}) {
+                -webkit-transform: translate3d(200px * (@i - 2), 0, 0);
+            }
+           .f-generateOffsets(@n, (@i + 1));
+        }
+        .f-generateOffsets(7);
+    }
+}
+
+.no3dScroller {
+    &-item {
+        -webkit-transition: transform @animationTime ease-out;
+
+        .f-generateOffsets(@n, @i: 1) when (@i =< @n) {
+            &:nth-of-type(@{i}) {
+                -webkit-transform: translateX(200px * (@i - 2));
+            }
+           .f-generateOffsets(@n, (@i + 1));
+        }
+        .f-generateOffsets(7);
+    }
+}
+
+.noTransformScroller {
+    &-item {
+        -webkit-transition: left @animationTime ease-out;
+
+        .f-generateOffsets(@n, @i: 1) when (@i =< @n) {
+            &:nth-of-type(@{i}) {
+                left: 200px * (@i - 2);
+            }
+           .f-generateOffsets(@n, (@i + 1));
+        }
+        .f-generateOffsets(7);
     }
 }

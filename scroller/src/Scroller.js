@@ -11,24 +11,25 @@ var ScrollerItem = Backbone.View.extend({
 
 var Scroller = Backbone.View.extend({
     className: "scroller",
+    ScrollerItem: ScrollerItem,
     initialize: function(opt) {
         this.itemsCount = opt && opt.itemsCount || 5;
     },
     left: function() {
         this._stopAnimation();
-        this.$el.prepend((new ScrollerItem).render().$el);
+        this.$el.prepend((new this.ScrollerItem).render().$el);
         this.$el.children().last().remove();
     },
     right: function() {
         this._stopAnimation();
-        this.$el.append((new ScrollerItem).render().$el);
+        this.$el.append((new this.ScrollerItem).render().$el);
         this.$el.children().first().remove();
     },
     render: function() {
         var i;
 
         for (i = 0; i < this.itemsCount; i++) {
-            this.$el.append((new ScrollerItem).render().$el);
+            this.$el.append((new this.ScrollerItem).render().$el);
         }
         return this;
     },
@@ -38,4 +39,26 @@ var Scroller = Backbone.View.extend({
     }
 });
 
-module.exports = Scroller;
+var No3dScrollerItem = ScrollerItem.extend({
+    className: "no3dScroller-item"
+});
+
+var No3DScroller = Scroller.extend({
+    className: "no3dScroller",
+    ScrollerItem: No3dScrollerItem,
+});
+
+var NoTransformScrollerItem = ScrollerItem.extend({
+    className: "noTransformScroller-item"
+});
+
+var NoTransformScroller = Scroller.extend({
+    className: "noTransformScroller",
+    ScrollerItem: NoTransformScrollerItem,
+});
+
+module.exports = {
+    Scroller: Scroller,
+    No3DScroller: No3DScroller,
+    NoTransformScroller: NoTransformScroller
+};
