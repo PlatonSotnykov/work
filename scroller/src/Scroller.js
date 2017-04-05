@@ -1,10 +1,11 @@
 require('./scroller.less');
 var Backbone = require('backbone');
+var $ = require('jquery');
 
 var ScrollerItem = Backbone.View.extend({
     className: "scroller-item",
     render: function() {
-        this.$el.html('content');
+        this.$el.append($('<div>').addClass('scroller-item-content').html("Content"));
         return this;
     }
 });
