@@ -45,7 +45,7 @@ body {
 
 .scroller {
     &-item {
-        -webkit-transition: transform @animationTime ease-out;
+        -webkit-transition: -webkit-transform @animationTime ease-out;
 
         .f-generateOffsets(@n, @i: 1) when (@i =< @n) {
             &:nth-of-type(@{i}) {
@@ -59,7 +59,7 @@ body {
 
 .no3dScroller {
     &-item {
-        -webkit-transition: transform @animationTime ease-out;
+        -webkit-transition: -webkit-transform @animationTime ease-out;
 
         .f-generateOffsets(@n, @i: 1) when (@i =< @n) {
             &:nth-of-type(@{i}) {
